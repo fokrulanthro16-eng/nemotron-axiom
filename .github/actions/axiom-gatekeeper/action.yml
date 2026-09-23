@@ -1,0 +1,119 @@
+name: 'Nemotron AXIOM Formal Gatekeeper'
+description: 'Autonomous Neuro-Symbolic SMT Verification & Provably Correct Code Synthesis in CI/CD'
+author: 'Nemotron AXIOM Engineering'
+branding:
+  icon: 'shield'
+  color: 'purple'
+
+inputs:
+  target-path:
+    description: 'Target directory or file path to formally verify'
+    required: false
+    default: '.'
+  nebius-api-key:
+    description: 'Nebius Token Factory API Key for Nemotron-70B model access'
+    required: true
+  tavily-api-key:
+    description: 'Tavily Search API Key for live technical standards lookup'
+    required: false
+    default: 'tvly-mock-key'
+  fail-on-violation:
+    description: 'Whether to break the CI build if symbolic invariant violation or deadlock is detected'
+    required: false
+    default: 'true'
+  sarif-output:
+    description: 'File destination for SARIF 2.1.0 report'
+    required: false
+    default: 'axiom-results.sarif'
+  slsa-output:
+    description: 'File destination for SLSA 1.0 cryptographic provenance receipt'
+    required: false
+    default: 'axiom-provenance.json'
+
+outputs:
+  verdict:
+    description: 'Formal verification outcome: PROVEN_CORRECT or INVARIANT_VIOLATION'
+    value: ${{ steps.axiom-run.outputs.verdict }}
+  sarif-path:
+    description: 'Path where SARIF 2.1.0 report was written'
+    value: ${{ inputs.sarif-output }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install Nemotron AXIOM Engine & CLI
+      shell: bash
+      run: |
+        echo "::group::Installing AXIOM Core & Dependencies"
+        python -m pip install --upgrade pip
+        if [ -d "backend" ]; then
+          pip install -e backend/
+        else
+          pip install axiom-sh || pip install .
+        fi
+        echo "::endgroup::"
+
+    - name: Execute Formal SMT Verification Gatekeeper
+      id: axiom-run
+      shell: bash
+      env:
+        NEBIUS_API_KEY: ${{ inputs.nebius-api-key }}
+        TAVILY_API_KEY: ${{ inputs.tavily-api-key }}
+        PYTHONIOENCODING: 'utf-8'
+      run: |
+        echo "::group::Running Nemotron AXIOM Formal Scan"
+        GATEKEEPER_ARGS="--path ${{ inputs.target-path }} --output ${{ inputs.sarif-output }}"
+        if [ "${{ inputs.fail-on-violation }}" = "false" ]; then
+          GATEKEEPER_ARGS="$GATEKEEPER_ARGS --no-fail"
+        fi
+        
+        EXIT_CODE=0
+        axiom gatekeeper $GATEKEEPER_ARGS || EXIT_CODE=$?
+        
+        if [ $EXIT_CODE -eq 0 ]; then
+          echo "verdict=PROVEN_CORRECT" >> $GITHUB_OUTPUT
+        else
+          echo "verdict=INVARIANT_VIOLATION" >> $GITHUB_OUTPUT
+        fi
+        echo "::endgroup::"
+        exit $EXIT_CODE
+
+    - name: Comment PR with Formal Verification Trace
+      if: failure() && github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          let sarifContent = '';
+          try {
+            if (fs.existsSync('${{ inputs.sarif-output }}')) {
+              sarifContent = fs.readFileSync('${{ inputs.sarif-output }}', 'utf8');
+            }
+          } catch (e) {
+            console.log('SARIF reading error:', e);
+          }
+
+          const commentBody = `### 🛡️ Nemotron AXIOM: Formal SMT Gatekeeper Alert
+          
+          **Status**: ❌ **BLOCKED - Invariant Violation Detected**
+          
+          Formal verification solver (Z3 SMT + NVIDIA Nemotron-70B) identified a mathematical safety violation (e.g. potential deadlock / state-space violation) in this Pull Request.
+          
+          - **Target Path**: \`${{ inputs.target-path }}\`
+          - **SARIF Diagnostics Generated**: \`${{ inputs.sarif-output }}\`
+          - **Security Recommendation**: Review counterexample trace and synthesize verified patch via \`axiom scan --prove\`.
+          
+          *Reported autonomously by Nemotron AXIOM CI Gatekeeper.*`;
+
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: commentBody
+          });

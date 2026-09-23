@@ -1,0 +1,48 @@
+name: Nemotron AXIOM Formal Verification CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: write
+
+jobs:
+  formal-verification:
+    name: Neuro-Symbolic SMT Gatekeeper
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Nemotron AXIOM Gatekeeper
+        id: gatekeeper
+        uses: ./.github/actions/axiom-gatekeeper
+        with:
+          target-path: './demo_samples/deadlock_banking.py'
+          nebius-api-key: ${{ secrets.NEBIUS_API_KEY || 'mock-key' }}
+          tavily-api-key: ${{ secrets.TAVILY_API_KEY || 'mock-key' }}
+          fail-on-violation: 'false' # Set to false in CI demo pipeline so workflow proceeds to report upload
+          sarif-output: 'axiom-results.sarif'
+
+      - name: Upload SARIF Security Scan Results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        continue-on-error: true
+        with:
+          sarif_file: 'axiom-results.sarif'
+          category: 'nemotron-axiom-formal-verification'
+
+      - name: Archive Formal Proof Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: axiom-verification-artifacts
+          path: |
+            axiom-results.sarif
+            axiom-provenance.json

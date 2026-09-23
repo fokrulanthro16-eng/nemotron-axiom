@@ -1,0 +1,14 @@
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+openai>=1.35.0
+z3-solver>=4.13.0
+tavily-python>=0.3.5
+langgraph>=0.1.0
+langchain-core>=0.2.10
+sse-starlette>=2.1.0
+httpx>=0.27.0
+python-dotenv>=1.0.1
+rich>=13.7.0
+gunicorn>=22.0.0

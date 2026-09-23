@@ -1,0 +1,81 @@
+# ==============================================================================
+# NEMOTRON AXIOM: ZERO-LEAK SECURITY .GITIGNORE
+# ==============================================================================
+
+# Secrets & Environment Variables (STRICT ZERO-LEAK ENFORCEMENT)
+.env
+.env.*
+*.env
+backend/.env
+backend/.env.*
+frontend/.env
+frontend/.env.*
+*.key
+*.pem
+*.secret
+*.token
+
+# Keep environment templates public
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+!frontend/src/lib/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Node & Next.js
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Test Artifacts & Logs
+*.log
+*.sarif
+axiom-results.sarif
+test_readiness.sarif
+axiom-provenance.json
+
+# IDEs & System Files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
