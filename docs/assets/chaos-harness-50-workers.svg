@@ -21,7 +21,7 @@
   <circle cx="45" cy="41" r="6" fill="#ef4444"/>
   <circle cx="65" cy="41" r="6" fill="#f59e0b"/>
   <circle cx="85" cy="41" r="6" fill="#10b981"/>
-  <text x="110" y="46" fill="#f43f5e" font-family="ui-monospace, monospace" font-size="12" font-weight="700">⚡ REAL RUNTIME CHAOS CONCURRENCY HARNESS</text>
+  <text x="110" y="46" fill="#f43f5e" font-family="ui-monospace, monospace" font-size="12" font-weight="700">[*] REAL RUNTIME CHAOS CONCURRENCY HARNESS</text>
   <text x="500" y="46" fill="#71717a" font-family="ui-monospace, monospace" font-size="12">|</text>
   <text x="520" y="46" fill="#e4e4e7" font-family="ui-monospace, monospace" font-size="12">50 Concurrent Worker Threads Contention Suite</text>
 
@@ -83,7 +83,7 @@
     <rect width="470" height="50" rx="10" fill="#123d2b"/>
     <text x="24" y="32" fill="#a7f3d0" font-family="ui-sans-serif, sans-serif" font-size="14" font-weight="800">NEMOTRON AXIOM CERTIFIED CODE</text>
     <rect x="330" y="14" width="120" height="24" rx="4" fill="#10b981"/>
-    <text x="342" y="30" fill="#000000" font-family="ui-monospace, monospace" font-size="11" font-weight="800">&check; 100% PASS</text>
+    <text x="342" y="30" fill="#000000" font-family="ui-monospace, monospace" font-size="11" font-weight="800">[OK] 100% PASS</text>
 
     <!-- Key Metrics Grid -->
     <g transform="translate(24, 70)">
@@ -114,7 +114,7 @@
       <text x="16" y="24" fill="#6ee7b7" font-family="ui-monospace, monospace" font-size="11" font-weight="700">CANONICAL ACQUISITION INTERLEAVING:</text>
       <g font-family="ui-monospace, monospace" font-size="10" fill="#a7f3d0" transform="translate(16, 46)">
         <text y="0">[0.001s] Worker-01: Acquires min lock (Account_1.id=1)</text>
-        <text y="18">[0.002s] Worker-02: Evaluates ID order &rarr; requests Lock 1</text>
+        <text y="18">[0.002s] Worker-02: Evaluates ID order --&gt; requests Lock 1</text>
         <text y="36" fill="#10b981">[0.004s] Worker-01: Acquires max lock (Account_2.id=2)</text>
         <text y="54" fill="#10b981">[0.006s] Worker-01: Balance transfer committed &amp; locks released</text>
         <text y="72">[0.008s] Worker-02: Acquires Lock 1, then Lock 2 (Zero Deadlock)</text>

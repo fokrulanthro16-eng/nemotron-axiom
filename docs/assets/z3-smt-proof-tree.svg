@@ -26,7 +26,7 @@
   <!-- Formula Banner -->
   <rect x="20" y="74" width="960" height="48" rx="8" fill="#1a1426" stroke="#a855f7" stroke-opacity="0.4"/>
   <text x="40" y="96" fill="#d8b4fe" font-family="ui-monospace, monospace" font-size="11" font-weight="700">PRIMARY SAFETY INVARIANT (GLOBAL ACYCLIC LOCK ORDERING):</text>
-  <text x="40" y="112" fill="#ffffff" font-family="ui-monospace, monospace" font-size="12" font-weight="600">&forall; t1, t2 &isin; Threads : (Holds(t1, L_A) &and; WaitsFor(t1, L_B) &and; Holds(t2, L_B)) &rArr; &not;WaitsFor(t2, L_A)</text>
+  <text x="40" y="112" fill="#ffffff" font-family="ui-monospace, monospace" font-size="12" font-weight="600">FORALL t1, t2 in Threads : (Holds(t1, L_A) AND WaitsFor(t1, L_B) AND Holds(t2, L_B)) ==&gt; NOT WaitsFor(t2, L_A)</text>
 
   <!-- Graph Comparisons -->
   <g transform="translate(20, 134)">
@@ -65,7 +65,7 @@
     <text x="80" y="140" fill="#ef4444" font-family="ui-monospace, monospace" font-size="9">HeldBy</text>
 
     <!-- Cycle callout -->
-    <rect x="180" y="105" x-anchor="center" width="100" height="24" rx="4" fill="#ef4444"/>
+    <rect x="180" y="105" width="100" height="24" rx="4" fill="#ef4444"/>
     <text x="190" y="121" fill="#ffffff" font-family="ui-monospace, monospace" font-size="10" font-weight="800">CYCLE FOUND</text>
   </g>
 
@@ -80,21 +80,21 @@
     <text x="66" y="146" fill="#6ee7b7" font-family="ui-monospace, monospace" font-size="9">Rank=0</text>
 
     <line x1="112" y1="135" x2="210" y2="135" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
-    <text x="135" y="124" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">&prec; Order</text>
+    <text x="135" y="124" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">&lt; Order</text>
 
     <circle cx="242" cy="135" r="28" fill="#123d2b" stroke="#10b981" stroke-width="2"/>
     <text x="226" y="132" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="11" font-weight="700">L_max</text>
     <text x="228" y="146" fill="#6ee7b7" font-family="ui-monospace, monospace" font-size="9">Rank=1</text>
 
     <line x1="274" y1="135" x2="368" y2="135" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
-    <text x="295" y="124" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">&prec; Order</text>
+    <text x="295" y="124" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">&lt; Order</text>
 
     <circle cx="400" cy="135" r="28" fill="#123d2b" stroke="#10b981" stroke-width="2"/>
     <text x="382" y="132" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="11" font-weight="700">Critical</text>
     <text x="385" y="146" fill="#6ee7b7" font-family="ui-monospace, monospace" font-size="9">Section</text>
 
     <rect x="40" y="190" width="390" height="34" rx="4" fill="#08140f" stroke="#10b981" stroke-opacity="0.3"/>
-    <text x="50" y="212" fill="#10b981" font-family="ui-monospace, monospace" font-size="11" font-weight="700">&check; THEOREM PROVED: Acyclic Lock Ordering Guarantees Zero Deadlocks</text>
+    <text x="50" y="212" fill="#10b981" font-family="ui-monospace, monospace" font-size="11" font-weight="700">[OK] THEOREM PROVED: Acyclic Lock Ordering Guarantees Zero Deadlocks</text>
   </g>
 
   <!-- Bottom SMT-LIB 2.0 Terminal Specification -->
@@ -108,8 +108,8 @@
       <text y="50"><tspan fill="#60a5fa">(assert</tspan> (and (&gt;= rank_L1 0) (&gt;= rank_L2 0)))</text>
       <text y="68"><tspan fill="#60a5fa">(assert</tspan> (&lt; rank_L1 rank_L2)) <tspan fill="#71717a">; Strictly ascending monotonic ID ordering constraint</tspan></text>
       <text y="86"><tspan fill="#60a5fa">(assert</tspan> (not (and (&lt; rank_L1 rank_L2) (&lt; rank_L2 rank_L1)))) <tspan fill="#71717a">; No cyclic wait condition</tspan></text>
-      <text y="104" fill="#10b981" font-weight="700"><tspan fill="#60a5fa">(check-sat)</tspan> &rarr; sat (Verified Sound &amp; Satisfiable in 0.003s)</text>
-      <text y="122" fill="#a7f3d0"><tspan fill="#60a5fa">(get-model)</tspan> &rarr; [rank_L1 = 0, rank_L2 = 1]</text>
+      <text y="104" fill="#10b981" font-weight="700"><tspan fill="#60a5fa">(check-sat)</tspan> --&gt; sat (Verified Sound &amp; Satisfiable in 0.003s)</text>
+      <text y="122" fill="#a7f3d0"><tspan fill="#60a5fa">(get-model)</tspan> --&gt; [rank_L1 = 0, rank_L2 = 1]</text>
     </g>
   </g>
 </svg>

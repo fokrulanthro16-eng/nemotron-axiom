@@ -9,13 +9,6 @@
       <stop offset="0%" stop-color="#76b900"/>
       <stop offset="100%" stop-color="#10b981"/>
     </linearGradient>
-    <linearGradient id="card-border" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#27272a"/>
-      <stop offset="100%" stop-color="#18181b"/>
-    </linearGradient>
-    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
-    </filter>
   </defs>
 
   <!-- Background -->
@@ -26,23 +19,23 @@
   <circle cx="45" cy="41" r="6" fill="#ef4444"/>
   <circle cx="65" cy="41" r="6" fill="#f59e0b"/>
   <circle cx="85" cy="41" r="6" fill="#10b981"/>
-  <text x="110" y="46" fill="#a1a1aa" font-family="ui-monospace, monospace" font-size="12" font-weight="600">NEMOTRON AXIOM — Mission Control (v1.0-PROD) | Nebius Token Factory &times; NVIDIA H100</text>
+  <text x="110" y="46" fill="#a1a1aa" font-family="ui-monospace, monospace" font-size="12" font-weight="600">NEMOTRON AXIOM -- Mission Control (v1.0-PROD) | Nebius Token Factory x NVIDIA H100</text>
   <rect x="980" y="28" width="180" height="26" rx="13" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.4"/>
   <circle cx="995" cy="41" r="4" fill="#10b981"/>
   <text x="1008" y="45" fill="#10b981" font-family="ui-monospace, monospace" font-size="11" font-weight="700">99.99% UPTIME (H100)</text>
 
   <!-- Commercial Banner Bar -->
   <rect x="20" y="72" width="1160" height="40" rx="6" fill="#12131a" stroke="#27272a"/>
-  <text x="40" y="97" fill="#76b900" font-family="ui-sans-serif, sans-serif" font-size="12" font-weight="700">⚡ NVIDIA Nemotron-70B</text>
-  <text x="195" y="97" fill="#52525b" font-family="ui-sans-serif, sans-serif" font-size="12">|</text>
-  <text x="210" y="97" fill="#00e5ff" font-family="ui-sans-serif, sans-serif" font-size="12" font-weight="600">Throughput: 194.2 tps</text>
-  <text x="360" y="97" fill="#52525b" font-family="ui-sans-serif, sans-serif" font-size="12">|</text>
-  <text x="375" y="97" fill="#a855f7" font-family="ui-sans-serif, sans-serif" font-size="12" font-weight="600">Solver: Microsoft Z3 SMT</text>
+  <text x="40" y="97" fill="#76b900" font-family="ui-sans-serif, sans-serif" font-size="12" font-weight="700">[+] NVIDIA Nemotron-70B</text>
+  <text x="215" y="97" fill="#52525b" font-family="ui-sans-serif, sans-serif" font-size="12">|</text>
+  <text x="230" y="97" fill="#00e5ff" font-family="ui-sans-serif, sans-serif" font-size="12" font-weight="600">Throughput: 194.2 tps</text>
+  <text x="380" y="97" fill="#52525b" font-family="ui-sans-serif, sans-serif" font-size="12">|</text>
+  <text x="395" y="97" fill="#a855f7" font-family="ui-sans-serif, sans-serif" font-size="12" font-weight="600">Solver: Microsoft Z3 SMT</text>
   
   <rect x="800" y="78" width="170" height="28" rx="6" fill="#1f2028" stroke="#3f3f46"/>
   <text x="815" y="96" fill="#e4e4e7" font-family="ui-monospace, monospace" font-size="11">pip install axiom-sh</text>
   <rect x="985" y="78" width="180" height="28" rx="6" fill="url(#nvidia-glow)"/>
-  <text x="1015" y="96" fill="#000000" font-family="ui-sans-serif, sans-serif" font-size="11" font-weight="800">★ UPGRADE TO PRO</text>
+  <text x="1015" y="96" fill="#000000" font-family="ui-sans-serif, sans-serif" font-size="11" font-weight="800">* UPGRADE TO PRO</text>
 
   <!-- React Flow State Graph Pipeline -->
   <g transform="translate(20, 122)">
@@ -112,10 +105,10 @@
     <!-- Z3 Callout Box Left -->
     <rect x="16" y="235" width="538" height="125" rx="6" fill="#201015" stroke="#ef4444" stroke-opacity="0.4"/>
     <text x="30" y="258" fill="#ef4444" font-family="ui-sans-serif, sans-serif" font-size="11" font-weight="800">Z3 SMT COUNTEREXAMPLE PROOF TRACE (UNSAT):</text>
-    <text x="30" y="278" fill="#fca5a5" font-family="ui-monospace, monospace" font-size="10">&exist; t1, t2 : WaitsFor(t1, L_B) &and; Holds(t1, L_A) &and; WaitsFor(t2, L_A) &and; Holds(t2, L_B)</text>
-    <text x="30" y="298" fill="#e4e4e7" font-family="ui-monospace, monospace" font-size="10">&bull; Step 1: Thread-1 acquires Account_1.lock</text>
-    <text x="30" y="316" fill="#e4e4e7" font-family="ui-monospace, monospace" font-size="10">&bull; Step 2: Thread-2 acquires Account_2.lock</text>
-    <text x="30" y="334" fill="#f87171" font-family="ui-monospace, monospace" font-size="10">&bull; Step 3: Circular wait deadlock formed (Coffman #4 satisfied)</text>
+    <text x="30" y="278" fill="#fca5a5" font-family="ui-monospace, monospace" font-size="10">EXISTS t1, t2 : WaitsFor(t1, L_B) AND Holds(t1, L_A) AND WaitsFor(t2, L_A) AND Holds(t2, L_B)</text>
+    <text x="30" y="298" fill="#e4e4e7" font-family="ui-monospace, monospace" font-size="10">* Step 1: Thread-1 acquires Account_1.lock</text>
+    <text x="30" y="316" fill="#e4e4e7" font-family="ui-monospace, monospace" font-size="10">* Step 2: Thread-2 acquires Account_2.lock</text>
+    <text x="30" y="334" fill="#f87171" font-family="ui-monospace, monospace" font-size="10">* Step 3: Circular wait deadlock formed (Coffman #4 satisfied)</text>
 
     <!-- Right Pane: Synthesized Patch -->
     <g transform="translate(590, 0)">
@@ -124,7 +117,7 @@
       <circle cx="20" cy="18" r="4" fill="#10b981"/>
       <text x="32" y="22" fill="#10b981" font-family="ui-monospace, monospace" font-size="11" font-weight="700">NVIDIA NEMOTRON-70B SURGICALLY SYNTHESIZED PATCH</text>
       <rect x="420" y="7" width="135" height="22" rx="4" fill="#10b981" fill-opacity="0.2"/>
-      <text x="430" y="22" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">&check; Z3 CERTIFIED SAFE</text>
+      <text x="430" y="22" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">[OK] Z3 CERTIFIED SAFE</text>
 
       <!-- Code Content Right -->
       <g transform="translate(16, 52)" font-family="ui-monospace, monospace" font-size="11" fill="#a1a1aa">
@@ -144,7 +137,7 @@
       <!-- Z3 Verification Attestation Right -->
       <rect x="16" y="278" width="538" height="82" rx="6" fill="#0d1f17" stroke="#10b981" stroke-opacity="0.4"/>
       <text x="30" y="300" fill="#10b981" font-family="ui-sans-serif, sans-serif" font-size="11" font-weight="800">FIRST-ORDER LOGIC SMT VERDICT: SAT (PROVABLY CORRECT)</text>
-      <text x="30" y="320" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="10">&forall; t1, t2 : Rank(L_min) = 0 &prec; Rank(L_max) = 1 &rArr; Acyclic Dependency Graph</text>
+      <text x="30" y="320" fill="#a7f3d0" font-family="ui-monospace, monospace" font-size="10">FORALL t1, t2 : Rank(L_min) = 0 &lt; Rank(L_max) = 1 --&gt; Acyclic Dependency Graph</text>
       <text x="30" y="340" fill="#6ee7b7" font-family="ui-monospace, monospace" font-size="10">SLSA Level 3 Attestation: ax-sig-ed25519-1d1223eddb73d0da65eba8ebb2d84543</text>
     </g>
   </g>
@@ -154,13 +147,13 @@
     <rect width="1160" height="50" rx="6" fill="#12131a" stroke="#27272a"/>
     <text x="30" y="30" fill="#71717a" font-family="ui-monospace, monospace" font-size="11">INVARIANTS:</text>
     <rect x="120" y="14" width="220" height="24" rx="4" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.3"/>
-    <text x="130" y="30" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">&check; AXIOM-001 Lock Acquisition DAG</text>
+    <text x="130" y="30" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">[OK] AXIOM-001 Lock Acquisition DAG</text>
 
     <rect x="350" y="14" width="230" height="24" rx="4" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.3"/>
-    <text x="360" y="30" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">&check; AXIOM-002 Mutual Exclusion SAT</text>
+    <text x="360" y="30" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">[OK] AXIOM-002 Mutual Exclusion SAT</text>
 
     <rect x="590" y="14" width="220" height="24" rx="4" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.3"/>
-    <text x="600" y="30" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">&check; AXIOM-003 No Deadlock Freeze</text>
+    <text x="600" y="30" fill="#10b981" font-family="ui-monospace, monospace" font-size="10" font-weight="700">[OK] AXIOM-003 No Deadlock Freeze</text>
 
     <rect x="940" y="14" width="190" height="24" rx="4" fill="#00e5ff" fill-opacity="0.15" stroke="#00e5ff" stroke-opacity="0.3"/>
     <text x="955" y="30" fill="#00e5ff" font-family="ui-monospace, monospace" font-size="10" font-weight="700">TAVILY GROUNDED (RFC 7234)</text>

@@ -53,20 +53,28 @@ flowchart TD
 
 <div align="center">
   <img src="docs/assets/dashboard-overview.svg" alt="Nemotron AXIOM Mission Control Dashboard" width="100%" />
-  <p><i>Figure 1: Nemotron AXIOM Mission Control — Live React Flow state machine, dual-pane formally verified code synthesis, and Nebius H100 benchmark bar.</i></p>
+  <p><i>Figure 1: Nemotron AXIOM Mission Control -- Live React Flow state machine, dual-pane formally verified code synthesis, and Nebius H100 benchmark bar.</i></p>
 </div>
 
-<p align="center">
-  <img src="docs/assets/chaos-harness-50-workers.svg" alt="50-Worker Chaos Concurrency Harness" width="49%" />
-  <img src="docs/assets/z3-smt-proof-tree.svg" alt="Z3 SMT Mathematical Proof Tree" width="49%" />
-</p>
-<p align="center">
-  <i>Figure 2: Real Runtime 50-Worker Chaos Concurrency Harness (Left) &amp; Microsoft Z3 SMT Mathematical Proof Tree (Right).</i>
-</p>
+<br/>
 
 <div align="center">
-  <img src="docs/assets/pr-gatekeeper.svg" alt="GitHub CI/CD PR Gatekeeper & Bot" width="85%" />
-  <p><i>Figure 3: Autonomous GitHub PR Gatekeeper — Automated SMT verification bot, counterexample traces, and one-click auto-merge.</i></p>
+  <img src="docs/assets/chaos-harness-50-workers.svg" alt="50-Worker Chaos Concurrency Harness" width="100%" />
+  <p><i>Figure 2: Real Runtime 50-Worker Chaos Concurrency Harness -- Empirical validation proving 0 deadlocks under severe thread contention.</i></p>
+</div>
+
+<br/>
+
+<div align="center">
+  <img src="docs/assets/z3-smt-proof-tree.svg" alt="Z3 SMT Mathematical Proof Tree" width="100%" />
+  <p><i>Figure 3: Microsoft Z3 SMT Theorem Prover -- First-Order Logic DAG proving canonical lock ordering satisfies satisfiability (SAT).</i></p>
+</div>
+
+<br/>
+
+<div align="center">
+  <img src="docs/assets/pr-gatekeeper.svg" alt="GitHub CI/CD PR Gatekeeper & Bot" width="100%" />
+  <p><i>Figure 4: Autonomous GitHub PR Gatekeeper -- Automated SMT verification bot, counterexample traces, and one-click auto-merge.</i></p>
 </div>
 
 ---
