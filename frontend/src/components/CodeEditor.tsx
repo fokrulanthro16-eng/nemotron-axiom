@@ -23,22 +23,22 @@ interface CodeEditorProps {
   status: "IDLE" | "RUNNING" | "CERTIFIED" | "FAILED";
   onExecute: () => void;
   onReset: () => void;
-  samples: Record<string, SampleCode>;
-  onSelectSample: (sampleKey: string) => void;
-  selectedSampleKey: string;
+  samples?: Record<string, SampleCode>;
+  onSelectSample?: (sampleKey: string) => void;
+  selectedSampleKey?: string;
 }
 
 export const CodeEditor: React.FC<CodeEditorProps> = ({
-  inputCode,
+  inputCode = "",
   setInputCode,
-  synthesizedCode,
-  isCertified,
-  status,
+  synthesizedCode = "",
+  isCertified = false,
+  status = "IDLE",
   onExecute,
   onReset,
-  samples,
+  samples = {},
   onSelectSample,
-  selectedSampleKey,
+  selectedSampleKey = "",
 }) => {
   const [copiedOriginal, setCopiedOriginal] = useState(false);
   const [copiedSynthesized, setCopiedSynthesized] = useState(false);
@@ -54,8 +54,8 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
     }
   };
 
-  const lineCountInput = inputCode.split("\n").length;
-  const lineCountOutput = (synthesizedCode || inputCode).split("\n").length;
+  const lineCountInput = (inputCode || "").split("\n").length;
+  const lineCountOutput = (synthesizedCode || inputCode || "").split("\n").length;
 
   return (
     <div className="flex flex-col space-y-3">
@@ -67,10 +67,10 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             BENCHMARK PRESETS:
           </span>
           <div className="flex flex-wrap gap-1.5">
-            {Object.entries(samples).map(([key, sample]) => (
+            {Object.entries(samples || {}).map(([key, sample]) => (
               <button
                 key={key}
-                onClick={() => onSelectSample(key)}
+                onClick={() => onSelectSample?.(key)}
                 disabled={status === "RUNNING"}
                 className={`px-2.5 py-1 text-xs rounded-md font-mono transition-colors ${
                   selectedSampleKey === key
@@ -78,7 +78,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
                     : "bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700"
                 }`}
               >
-                {sample.title.split(" ")[0]} ({key === "deadlock_transfer" ? "Deadlock" : "Race"})
+                {(sample?.title?.split(" ")?.[0] || key)} ({key === "deadlock_transfer" ? "Deadlock" : "Race"})
               </button>
             ))}
           </div>

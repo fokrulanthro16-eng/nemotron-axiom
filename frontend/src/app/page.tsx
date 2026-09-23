@@ -134,10 +134,10 @@ export default function MissionControlPage() {
 
   const [samples, setSamples] = useState<Record<string, SampleCode>>({
     deadlock_transfer: {
-      name: "Deadlock in Concurrent Bank Transfer",
+      title: "Deadlock in Concurrent Bank Transfer",
       description: "Two threads acquire locks in conflicting order, causing cyclic freeze.",
+      language: "python",
       code: DEFAULT_INPUT_CODE,
-      category: "CONCURRENCY_DEADLOCK",
     },
   });
   const [selectedSampleKey, setSelectedSampleKey] = useState<string>("deadlock_transfer");
