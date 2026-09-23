@@ -38,7 +38,7 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
     },
     {
       id: "chaos" as ScreenId,
-      name: "Chaos Stress Harness",
+      name: "Chaos Concurrency Lab",
       icon: Zap,
       badge: "50 WORKERS",
       badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30",
@@ -52,14 +52,14 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
     },
     {
       id: "benchmarks" as ScreenId,
-      name: "Benchmarks & Telemetry",
+      name: "Benchmarks",
       icon: Activity,
       badge: "H100 SXM5",
       badgeColor: "bg-nvidia/20 text-nvidia border-nvidia/30",
     },
     {
       id: "grounding" as ScreenId,
-      name: "RFC Grounding",
+      name: "RFC Knowledge Explorer",
       icon: BookOpen,
       badge: "TAVILY",
       badgeColor: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
