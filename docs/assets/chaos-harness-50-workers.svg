@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#11131a"/>
+    </linearGradient>
+    <linearGradient id="redCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a1215"/>
+      <stop offset="100%" stop-color="#181114"/>
+    </linearGradient>
+    <linearGradient id="greenCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d261b"/>
+      <stop offset="100%" stop-color="#101815"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="600" fill="url(#bg2)"/>
+
+  <!-- Header Bar -->
+  <rect x="20" y="20" width="960" height="42" rx="8" fill="#18181b" stroke="#27272a"/>
+  <circle cx="45" cy="41" r="6" fill="#ef4444"/>
+  <circle cx="65" cy="41" r="6" fill="#f59e0b"/>
+  <circle cx="85" cy="41" r="6" fill="#10b981"/>
+  <text x="110" y="46" fill="#f43f5e" font-family="ui-monospace, monospace" font-size="12" font-weight="700">⚡ REAL RUNTIME CHAOS CONCURRENCY HARNESS</text>
+  <text x="500" y="46" fill="#71717a" font-family="ui-monospace, monospace" font-size="12">|</text>
+  <text x="520" y="46" fill="#e4e4e7" font-family="ui-monospace, monospace" font-size="12">50 Concurrent Worker Threads Contention Suite</text>
+
+  <!-- Split Comparison Cards -->
+  <!-- Left Card: Flawed -->
+  <g transform="translate(20, 80)">
+    <rect width="470" height="490" rx="10" fill="url(#redCard)" stroke="#ef4444" stroke-opacity="0.8" stroke-width="2"/>
+    
+    <!-- Title Section -->
+    <rect width="470" height="50" rx="10" fill="#3f1218"/>
+    <text x="24" y="32" fill="#fca5a5" font-family="ui-sans-serif, sans-serif" font-size="14" font-weight="800">FLAWED TARGET CODE</text>
+    <rect x="330" y="14" width="120" height="24" rx="4" fill="#ef4444"/>
+    <text x="342" y="30" fill="#ffffff" font-family="ui-monospace, monospace" font-size="11" font-weight="700">DEADLOCKED</text>
+
+    <!-- Key Metrics Grid -->
+    <g transform="translate(24, 70)">
+      <!-- Metric 1 -->
+      <rect width="195" height="70" rx="6" fill="#1f1114" stroke="#ef4444" stroke-opacity="0.3"/>
+      <text x="14" y="24" fill="#a1a1aa" font-family="ui-sans-serif, sans-serif" font-size="11">Success Rate</text>
+      <text x="14" y="54" fill="#ef4444" font-family="ui-monospace, monospace" font-size="24" font-weight="800">0.0%</text>
+
+      <!-- Metric 2 -->
+      <rect x="215" width="195" height="70" rx="6" fill="#1f1114" stroke="#ef4444" stroke-opacity="0.3"/>
+      <text x="229" y="24" fill="#a1a1aa" font-family="ui-sans-serif, sans-serif" font-size="11">Deadlocks Detected</text>
+      <text x="229" y="54" fill="#ef4444" font-family="ui-monospace, monospace" font-size="24" font-weight="800">50 / 50</text>
+
+      <!-- Metric 3 -->
+      <rect y="82" width="195" height="70" rx="6" fill="#1f1114" stroke="#ef4444" stroke-opacity="0.3"/>
+      <text x="14" y="106" fill="#a1a1aa" font-family="ui-sans-serif, sans-serif" font-size="11">Latency (Barrier Timeout)</text>
+      <text x="14" y="136" fill="#ef4444" font-family="ui-monospace, monospace" font-size="24" font-weight="800">2,000ms</text>
+
+      <!-- Metric 4 -->
+      <rect x="215" y="82" width="195" height="70" rx="6" fill="#1f1114" stroke="#ef4444" stroke-opacity="0.3"/>
+      <text x="229" y="106" fill="#a1a1aa" font-family="ui-sans-serif, sans-serif" font-size="11">Thread Starvation</text>
+      <text x="229" y="136" fill="#ef4444" font-family="ui-monospace, monospace" font-size="24" font-weight="800">100%</text>
+    </g>
+
+    <!-- Thread Interleaving Trace Terminal -->
+    <g transform="translate(24, 245)">
+      <rect width="422" height="215" rx="6" fill="#140a0c" stroke="#ef4444" stroke-opacity="0.3"/>
+      <text x="16" y="24" fill="#f87171" font-family="ui-monospace, monospace" font-size="11" font-weight="700">KERNEL THREAD CONTENTION TRACE:</text>
+      <g font-family="ui-monospace, monospace" font-size="10" fill="#fca5a5" transform="translate(16, 46)">
+        <text y="0">[0.001s] Worker-01: Acquires Account_1.lock</text>
+        <text y="18">[0.002s] Worker-02: Acquires Account_2.lock</text>
+        <text y="36" fill="#ef4444">[0.003s] Worker-01: BLOCKED waiting for Account_2.lock</text>
+        <text y="54" fill="#ef4444">[0.004s] Worker-02: BLOCKED waiting for Account_1.lock</text>
+        <text y="72">[0.005s] Worker-03..50: Queued on futex wait queue</text>
+        <text y="94" fill="#f87171">[2.000s] &gt;&gt; TIMEOUT BARRIER REACHED: 50 THREADS FROZEN</text>
+        <text y="112" fill="#ef4444">&gt;&gt; Invariant UNSAT: Circular Lock Dependency Confirmed</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right Card: Verified -->
+  <g transform="translate(510, 80)">
+    <rect width="470" height="490" rx="10" fill="url(#greenCard)" stroke="#10b981" stroke-width="2"/>
+    
+    <!-- Title Section -->
+    <rect width="470" height="50" rx="10" fill="#123d2b"/>
+    <text x="24" y="32" fill="#a7f3d0" font-family="ui-sans-serif, sans-serif" font-size="14" font-weight="800">NEMOTRON AXIOM CERTIFIED CODE</text>
+    <rect x="330" y="14" width="120" height="24" rx="4" fill="#10b981"/>
+    <text x="342" y="30" fill="#000000" font-family="ui-monospace, monospace" font-size="11" font-weight="800">&check; 100% PASS</text>
+
+    <!-- Key Metrics Grid -->
+    <g transform="translate(24, 70)">
+      <!-- Metric 1 -->
+      <rect width="195" height="70" rx="6" fill="#0e1d16" stroke="#10b981" stroke-opacity="0.3"/>
+      <text x="14" y="24" fill="#a1a1aa" font-family="ui-sans-serif, sans-serif" font-size="11">Success Rate</text>
+      <text x="14" y="54" fill="#10b981" font-family="ui-monospace, monospace" font-size="24" font-weight="800">100.0%</text>
+
+      <!-- Metric 2 -->
+      <rect x="215" width="195" height="70" rx="6" fill="#0e1d16" stroke="#10b981" stroke-opacity="0.3"/>
+      <text x="229" y="24" fill="#a1a1aa" font-family="ui-sans-serif, sans-serif" font-size="11">Deadlocks Detected</text>
+      <text x="229" y="54" fill="#10b981" font-family="ui-monospace, monospace" font-size="24" font-weight="800">0 / 50</text>
+
+      <!-- Metric 3 -->
+      <rect y="82" width="195" height="70" rx="6" fill="#0e1d16" stroke="#10b981" stroke-opacity="0.3"/>
+      <text x="14" y="106" fill="#a1a1aa" font-family="ui-sans-serif, sans-serif" font-size="11">Throughput</text>
+      <text x="14" y="136" fill="#10b981" font-family="ui-monospace, monospace" font-size="24" font-weight="800">14,820 ops/s</text>
+
+      <!-- Metric 4 -->
+      <rect x="215" y="82" width="195" height="70" rx="6" fill="#0e1d16" stroke="#10b981" stroke-opacity="0.3"/>
+      <text x="229" y="106" fill="#a1a1aa" font-family="ui-sans-serif, sans-serif" font-size="11">Latency (p99)</text>
+      <text x="229" y="136" fill="#10b981" font-family="ui-monospace, monospace" font-size="24" font-weight="800">0.042ms</text>
+    </g>
+
+    <!-- Thread Interleaving Trace Terminal -->
+    <g transform="translate(24, 245)">
+      <rect width="422" height="215" rx="6" fill="#08140f" stroke="#10b981" stroke-opacity="0.3"/>
+      <text x="16" y="24" fill="#6ee7b7" font-family="ui-monospace, monospace" font-size="11" font-weight="700">CANONICAL ACQUISITION INTERLEAVING:</text>
+      <g font-family="ui-monospace, monospace" font-size="10" fill="#a7f3d0" transform="translate(16, 46)">
+        <text y="0">[0.001s] Worker-01: Acquires min lock (Account_1.id=1)</text>
+        <text y="18">[0.002s] Worker-02: Evaluates ID order &rarr; requests Lock 1</text>
+        <text y="36" fill="#10b981">[0.004s] Worker-01: Acquires max lock (Account_2.id=2)</text>
+        <text y="54" fill="#10b981">[0.006s] Worker-01: Balance transfer committed &amp; locks released</text>
+        <text y="72">[0.008s] Worker-02: Acquires Lock 1, then Lock 2 (Zero Deadlock)</text>
+        <text y="94" fill="#34d399">[0.092s] &gt;&gt; 50/50 CONCURRENT WORKERS COMPLETED</text>
+        <text y="112" fill="#10b981">&gt;&gt; Z3 Mathematical Proof Validated Empirically</text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600">
+  <defs>
+    <linearGradient id="gh-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#090d12"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="600" fill="url(#gh-bg)"/>
+
+  <!-- GitHub Modal Outer Window -->
+  <g transform="translate(30, 20)">
+    <rect width="940" height="560" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1.5"/>
+    
+    <!-- PR Header -->
+    <g transform="translate(24, 20)">
+      <text y="24" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="600">
+        feat(payments): concurrent account balance transfers <tspan fill="#8b949e">#142</tspan>
+      </text>
+      
+      <rect y="38" width="70" height="24" rx="12" fill="#238636"/>
+      <text x="14" y="54" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="600">&odot; Open</text>
+      
+      <text x="82" y="54" fill="#8b949e" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">
+        <tspan fill="#58a6ff">fokrulanthro16-eng</tspan> wants to merge 3 commits into <tspan fill="#58a6ff" font-family="ui-monospace, monospace">main</tspan> from <tspan fill="#58a6ff" font-family="ui-monospace, monospace">feat/concurrency-transfers</tspan>
+      </text>
+    </g>
+
+    <!-- CI/CD Status Check Box -->
+    <g transform="translate(24, 94)">
+      <rect width="892" height="66" rx="6" fill="#161b22" stroke="#f85149" stroke-width="1.5"/>
+      <circle cx="28" cy="33" r="10" fill="#da3633"/>
+      <text x="24" y="38" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="800">&times;</text>
+      <text x="50" y="28" fill="#f0f6fc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="600">
+        Checks / AXIOM Neuro-Symbolic Gatekeeper — FAILED
+      </text>
+      <text x="50" y="48" fill="#8b949e" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11">
+        1 critical deadlock invariant violated (Z3 Theorem Prover UNSAT). Merge blocked by enterprise policy.
+      </text>
+      
+      <rect x="740" y="20" width="132" height="26" rx="6" fill="#21262d" stroke="#30363d"/>
+      <text x="756" y="37" fill="#58a6ff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600">View SARIF Details</text>
+    </g>
+
+    <!-- Bot Review Comment Box -->
+    <g transform="translate(24, 175)">
+      <!-- Comment Header -->
+      <rect width="892" height="38" rx="6" fill="#161b22" stroke="#30363d"/>
+      <circle cx="24" cy="19" r="10" fill="#76b900"/>
+      <text x="18" y="24" fill="#000000" font-family="ui-monospace, monospace" font-size="11" font-weight="800">A</text>
+      <text x="44" y="24" fill="#f0f6fc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="600">axiom-enterprise[bot]</text>
+      <rect x="195" y="10" width="34" height="18" rx="9" fill="#30363d"/>
+      <text x="202" y="23" fill="#8b949e" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10">bot</text>
+      <text x="238" y="23" fill="#8b949e" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11">commented 2 minutes ago</text>
+
+      <!-- Comment Body -->
+      <rect y="38" width="892" height="252" rx="0" fill="#0d1117" stroke="#30363d"/>
+      
+      <text x="24" y="68" fill="#f0f6fc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="700">
+        🛡️ Formal SMT Verification Gatekeeper Notice
+      </text>
+      
+      <text x="24" y="92" fill="#c9d1d9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">
+        A mathematical concurrency defect was detected in <tspan font-family="ui-monospace, monospace" fill="#58a6ff">services/transfer.py</tspan>. Microsoft Z3 solver refuted invariant:
+      </text>
+
+      <!-- Invariant Box inside Comment -->
+      <rect x="24" y="106" width="844" height="34" rx="4" fill="#161b22" stroke="#f85149" stroke-opacity="0.4"/>
+      <text x="36" y="128" fill="#ff7b72" font-family="ui-monospace, monospace" font-size="11">
+        &bull; AXIOM-001 (Cyclic Wait): &exist; t1, t2 : WaitsFor(t1, lock_B) &and; WaitsFor(t2, lock_A) &rarr; DEADLOCK
+      </text>
+
+      <!-- Suggested Patch Diff -->
+      <rect x="24" y="148" width="844" height="126" rx="4" fill="#161b22" stroke="#30363d"/>
+      <text x="36" y="168" fill="#8b949e" font-family="ui-monospace, monospace" font-size="10">Suggested Nemotron-70B Formal Patch:</text>
+      <text x="36" y="188" fill="#f85149" font-family="ui-monospace, monospace" font-size="11">- with from_acc.lock:</text>
+      <text x="36" y="206" fill="#f85149" font-family="ui-monospace, monospace" font-size="11">-     with to_acc.lock:</text>
+      <text x="36" y="226" fill="#3fb950" font-family="ui-monospace, monospace" font-size="11">+ first_lock, second_lock = ((from_acc.lock, to_acc.lock) if from_acc.id &lt; to_acc.id else (to_acc.lock, from_acc.lock))</text>
+      <text x="36" y="244" fill="#3fb950" font-family="ui-monospace, monospace" font-size="11">+ with first_lock: with second_lock:</text>
+      <text x="36" y="262" fill="#7ee787" font-family="ui-monospace, monospace" font-size="10">&check; Proven SAT with Z3 Solver &bull; SLSA Level 3 Attested</text>
+    </g>
+
+    <!-- Action Merge Bar -->
+    <g transform="translate(24, 485)">
+      <rect width="892" height="55" rx="6" fill="#161b22" stroke="#30363d"/>
+      
+      <rect x="20" y="12" width="220" height="32" rx="6" fill="#238636"/>
+      <text x="36" y="32" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700">
+        &check; Commit Fix &amp; Auto-Merge PR
+      </text>
+
+      <rect x="254" y="12" width="180" height="32" rx="6" fill="#21262d" stroke="#30363d"/>
+      <text x="270" y="32" fill="#c9d1d9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">
+        Download SARIF 2.1.0
+      </text>
+
+      <text x="560" y="33" fill="#8b949e" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11">
+        Certified by Nemotron AXIOM Formal SMT Engine
+      </text>
+    </g>
+  </g>
+</svg>

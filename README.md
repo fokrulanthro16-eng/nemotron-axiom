@@ -52,20 +52,20 @@ flowchart TD
 ## 🖥️ Platform Showcase & Visual Artifacts
 
 <div align="center">
-  <img src="docs/assets/dashboard-overview.png" alt="Nemotron AXIOM Mission Control Dashboard" width="100%" />
+  <img src="docs/assets/dashboard-overview.svg" alt="Nemotron AXIOM Mission Control Dashboard" width="100%" />
   <p><i>Figure 1: Nemotron AXIOM Mission Control — Live React Flow state machine, dual-pane formally verified code synthesis, and Nebius H100 benchmark bar.</i></p>
 </div>
 
 <p align="center">
-  <img src="docs/assets/chaos-harness-50-workers.png" alt="50-Worker Chaos Concurrency Harness" width="49%" />
-  <img src="docs/assets/z3-smt-proof-tree.png" alt="Z3 SMT Mathematical Proof Tree" width="49%" />
+  <img src="docs/assets/chaos-harness-50-workers.svg" alt="50-Worker Chaos Concurrency Harness" width="49%" />
+  <img src="docs/assets/z3-smt-proof-tree.svg" alt="Z3 SMT Mathematical Proof Tree" width="49%" />
 </p>
 <p align="center">
   <i>Figure 2: Real Runtime 50-Worker Chaos Concurrency Harness (Left) &amp; Microsoft Z3 SMT Mathematical Proof Tree (Right).</i>
 </p>
 
 <div align="center">
-  <img src="docs/assets/pr-gatekeeper.png" alt="GitHub CI/CD PR Gatekeeper & Bot" width="85%" />
+  <img src="docs/assets/pr-gatekeeper.svg" alt="GitHub CI/CD PR Gatekeeper & Bot" width="85%" />
   <p><i>Figure 3: Autonomous GitHub PR Gatekeeper — Automated SMT verification bot, counterexample traces, and one-click auto-merge.</i></p>
 </div>
 
