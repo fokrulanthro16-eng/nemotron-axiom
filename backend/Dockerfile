@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
     git \
+    libz3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt pyproject.toml ./
@@ -29,6 +30,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     libgomp1 \
+    libz3-4 \
     && rm -rf /var/lib/apt/lists/*
 
 # Create unprivileged system user
