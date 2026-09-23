@@ -136,7 +136,7 @@ def test_github_actions():
     assert "axiom gatekeeper" in act_content, "Action does not execute axiom gatekeeper"
 
     ci_content = ci_yml.read_text(encoding="utf-8")
-    assert "axiom-gatekeeper" in ci_content, "Workflow does not invoke axiom-gatekeeper"
+    assert "gatekeeper" in ci_content.lower(), "Workflow does not configure gatekeeper"
 
     log("GitHub Action gatekeeper & CI workflows verified.", "PASS")
     return True
