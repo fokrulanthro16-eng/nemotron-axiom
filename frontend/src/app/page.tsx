@@ -6,11 +6,12 @@ import { CommercialHeader } from "@/components/CommercialHeader";
 import { PricingModal } from "@/components/PricingModal";
 import { ApiDocsDrawer } from "@/components/ApiDocsDrawer";
 import { NebiusBenchmarkBar } from "@/components/NebiusBenchmarkBar";
-import { VisualGraph } from "@/components/VisualGraph";
-import { CodeEditor } from "@/components/CodeEditor";
-import { StressChaosPanel } from "@/components/StressChaosPanel";
-import { InvariantCard } from "@/components/InvariantCard";
-import { ExecutionTerminal } from "@/components/ExecutionTerminal";
+import { NavigationTabs, ScreenId } from "@/components/NavigationTabs";
+import { VerificationStudioScreen } from "@/components/screens/VerificationStudioScreen";
+import { ChaosHarnessScreen } from "@/components/screens/ChaosHarnessScreen";
+import { DevSecOpsGatekeeperScreen } from "@/components/screens/DevSecOpsGatekeeperScreen";
+import { BenchmarkTelemetryScreen } from "@/components/screens/BenchmarkTelemetryScreen";
+import { RfcGroundingScreen } from "@/components/screens/RfcGroundingScreen";
 import { GitHubPRModal } from "@/components/GitHubPRModal";
 import {
   SampleCode,
@@ -32,6 +33,7 @@ export default function MissionControlPage() {
   const [isPricingOpen, setIsPricingOpen] = useState<boolean>(false);
   const [pricingTier, setPricingTier] = useState<"free" | "pro" | "enterprise">("pro");
   const [isApiDocsOpen, setIsApiDocsOpen] = useState<boolean>(false);
+  const [activeScreen, setActiveScreen] = useState<ScreenId>("verification");
 
   const [samples, setSamples] = useState<Record<string, SampleCode>>({});
   const [selectedSampleKey, setSelectedSampleKey] = useState<string>("deadlock_transfer");
@@ -214,46 +216,62 @@ export default function MissionControlPage() {
         lastLatencyMs={lastLatencyMs}
       />
 
+      {/* Multi-Screen Enterprise Navigation Tabs */}
+      <NavigationTabs
+        activeScreen={activeScreen}
+        onSelectScreen={setActiveScreen}
+        isCertified={isCertified}
+      />
+
       <main className="flex-1 p-4 md:p-6 space-y-5 max-w-[1600px] w-full mx-auto">
-        {/* State Machine Visualization */}
-        <VisualGraph
-          currentNode={currentNode}
-          isCertified={isCertified}
-          status={status}
-        />
+        {/* Screen 1: Neuro-Symbolic Verification Engine (IDE / Proof Studio) */}
+        {activeScreen === "verification" && (
+          <VerificationStudioScreen
+            currentNode={currentNode}
+            isCertified={isCertified}
+            status={status}
+            inputCode={inputCode}
+            setInputCode={setInputCode}
+            synthesizedCode={synthesizedCode}
+            onExecute={handleExecute}
+            onReset={handleReset}
+            samples={samples}
+            onSelectSample={handleSelectSample}
+            selectedSampleKey={selectedSampleKey}
+            invariants={invariants}
+            logs={logs}
+            counterexample={counterexample}
+            citations={citations}
+            patches={patches}
+          />
+        )}
 
-        {/* Dual Pane Code Workspace */}
-        <CodeEditor
-          inputCode={inputCode}
-          setInputCode={setInputCode}
-          synthesizedCode={synthesizedCode}
-          isCertified={isCertified}
-          status={status}
-          onExecute={handleExecute}
-          onReset={handleReset}
-          samples={samples}
-          onSelectSample={handleSelectSample}
-          selectedSampleKey={selectedSampleKey}
-        />
+        {/* Screen 2: Runtime Chaos Concurrency Lab (50 Workers) */}
+        {activeScreen === "chaos" && (
+          <ChaosHarnessScreen
+            inputCode={inputCode}
+            synthesizedCode={synthesizedCode}
+            isCertified={isCertified}
+          />
+        )}
 
-        {/* Real Runtime Chaos Stress-Harness */}
-        <StressChaosPanel
-          inputCode={inputCode}
-          synthesizedCode={synthesizedCode}
-          isCertified={isCertified}
-        />
+        {/* Screen 3: DevSecOps Gatekeeper & SARIF 2.1.0 Audit */}
+        {activeScreen === "gatekeeper" && (
+          <DevSecOpsGatekeeperScreen
+            isCertified={isCertified}
+            synthesizedCode={synthesizedCode}
+          />
+        )}
 
-        {/* Formal Mathematical Invariants Grid */}
-        <InvariantCard invariants={invariants} isCertified={isCertified} />
+        {/* Screen 4: Benchmark Matrix & Nebius H100 Cluster Telemetry */}
+        {activeScreen === "benchmarks" && (
+          <BenchmarkTelemetryScreen />
+        )}
 
-        {/* Live Execution & Proof Terminal */}
-        <ExecutionTerminal
-          logs={logs}
-          counterexample={counterexample}
-          citations={citations}
-          patches={patches}
-          isCertified={isCertified}
-        />
+        {/* Screen 5: Tavily Neuro-Grounding & RFC Knowledge Explorer */}
+        {activeScreen === "grounding" && (
+          <RfcGroundingScreen citations={citations} />
+        )}
       </main>
 
       {/* Footer */}
