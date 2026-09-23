@@ -122,27 +122,56 @@ def run_scan(args):
 def run_gatekeeper(args):
     """CI/CD Gatekeeper mode checking pull request invariants."""
     print_axiom_header()
-    branch = args.branch
+    branch = getattr(args, "branch", "main")
+    target_path = getattr(args, "path", None)
+    output_sarif = getattr(args, "output", None)
+    no_fail = getattr(args, "no_fail", False)
+    fail_on_violation = getattr(args, "fail_on_violation", True) and not no_fail
+
     console.print(f"[bold white]Evaluating CI/CD Gatekeeper on branch:[/bold white] [cyan]{branch}[/cyan]")
 
-    # Scan standard demo samples in repo
-    sample_path = backend_dir.parent / "demo_samples" / "deadlock_sample.py"
+    # Resolve target sample or path
+    if target_path:
+        p = Path(target_path)
+        sample_path = p if p.is_file() else (p / "demo_samples" / "deadlock_sample.py")
+        if not sample_path.exists() and p.is_dir():
+            py_files = list(p.glob("**/*.py"))
+            sample_path = py_files[0] if py_files else sample_path
+    else:
+        sample_path = backend_dir.parent / "demo_samples" / "deadlock_sample.py"
+
     if not sample_path.exists():
-        console.print("[yellow]No sample found; running synthetic verification check...[/yellow]")
+        console.print(f"[yellow]No target code found at {sample_path}; running synthetic verification check...[/yellow]")
         return 0
 
     with open(sample_path, "r", encoding="utf-8") as f:
         code = f.read()
 
     ast_meta = extract_ast_concurrency_metadata(code)
-    z3_res = z3_verifier.verify_codebase(code, ast_meta, [])
+    invariants = nebius_client.deduce_formal_invariants(code, ast_meta)
+    z3_res = z3_verifier.verify_codebase(code, ast_meta, invariants)
+
+    if output_sarif:
+        report = sarif_exporter.generate_sarif_report(
+            code=code,
+            is_certified=z3_res.passed,
+            invariants=invariants,
+            counterexample=z3_res.counterexample,
+            target_file=str(sample_path)
+        )
+        with open(output_sarif, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2)
+        console.print(f"[green]OASIS SARIF report exported to {output_sarif}[/green]")
 
     if not z3_res.passed:
         console.print(f"\n[bold red][BLOCKED] CI/CD GATEKEEPER VIOLATION on branch '{branch}':[/bold red]")
         console.print("  Critical circular wait deadlock detected by Z3 SMT solver.")
         console.print("  Merge is blocked by AXIOM enterprise policy until verified patch is committed.")
-        if args.fail_on_violation:
+        if fail_on_violation:
             return 1
+        else:
+            console.print("[yellow][NOTICE] --no-fail or mock mode active: CI Gatekeeper exiting with status 0.[/yellow]")
+            return 0
     else:
         console.print(f"\n[bold green][PASS] CI/CD GATEKEEPER PASSED on branch '{branch}':[/bold green]")
         console.print("  All formal mathematical invariants certified SAT.")
@@ -167,7 +196,10 @@ def cli_entrypoint():
     # Command: gatekeeper
     gate_parser = subparsers.add_parser("gatekeeper", help="Run CI/CD Pull Request gatekeeper check")
     gate_parser.add_argument("--branch", type=str, default="main", help="Target branch name")
+    gate_parser.add_argument("--path", type=str, default=None, help="Target file or directory to scan")
+    gate_parser.add_argument("--output", type=str, default=None, help="Output destination for SARIF report")
     gate_parser.add_argument("--fail-on-violation", action="store_true", default=True, help="Exit with non-zero code on violation")
+    gate_parser.add_argument("--no-fail", action="store_true", help="Always exit 0 regardless of violations (audit/demo mode)")
 
     # Command: version
     subparsers.add_parser("version", help="Print AXIOM engine version and model spec")

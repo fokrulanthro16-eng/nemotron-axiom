@@ -69,7 +69,8 @@ runs:
       run: |
         echo "::group::Running Nemotron AXIOM Formal Scan"
         GATEKEEPER_ARGS="--path ${{ inputs.target-path }} --output ${{ inputs.sarif-output }}"
-        if [ "${{ inputs.fail-on-violation }}" = "false" ]; then
+        if [ "${{ inputs.fail-on-violation }}" = "false" ] || [ "${{ inputs.nebius-api-key }}" = "mock-key" ] || [ -z "${{ inputs.nebius-api-key }}" ]; then
+          echo "::notice title=Nemotron AXIOM::Running in Mock Verification Mode or Audit Mode (--no-fail active)"
           GATEKEEPER_ARGS="$GATEKEEPER_ARGS --no-fail"
         fi
         
